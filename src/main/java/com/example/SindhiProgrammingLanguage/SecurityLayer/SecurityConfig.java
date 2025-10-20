@@ -29,7 +29,10 @@ public class SecurityConfig {
                                 .maxAgeInSeconds(31536000))
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/SindhiLanguage/v1").permitAll()
+                        // ✅ Allow all endpoints under /SindhiLanguage/v1
+                        .requestMatchers("/SindhiLanguage/v1/**").permitAll()
+                        
+                        // ✅ Swagger/OpenAPI endpoints
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
@@ -38,6 +41,7 @@ public class SecurityConfig {
                                 "/v3/api-docs/swagger-config"
                         ).permitAll()
 
+                        // ✅ All other requests require authentication
                         .anyRequest().authenticated()
                 );
 
@@ -47,7 +51,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("https://sindhiprogramminglanguage.netlify.app")); // ✅ exact domain
+
+        // ✅ Allow only your frontend domain
+        config.setAllowedOrigins(List.of("https://latifjiboli.app"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);

@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // ✅ Allow all endpoints under /SindhiLanguage/v1
                         .requestMatchers("/SindhiLanguage/v1/**").permitAll()
+.requestMatchers("/actuator/health/**").permitAll()
                         
                         // ✅ Swagger/OpenAPI endpoints
                         .requestMatchers(

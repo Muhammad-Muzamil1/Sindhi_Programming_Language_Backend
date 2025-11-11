@@ -1,0 +1,34 @@
+nohup: ignoring input
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+
+2025-11-11T18:04:08.709Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] e.S.SindhiProgrammingLanguageApplication : Starting SindhiProgrammingLanguageApplication v0.0.1-SNAPSHOT using Java 21.0.8 with PID 1728 (/home/ubuntu/Sindhi_Programming_Language_Backend/target/SindhiProgrammingLanguage-0.0.1-SNAPSHOT.jar started by ubuntu in /home/ubuntu/Sindhi_Programming_Language_Backend)
+2025-11-11T18:04:08.717Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] e.S.SindhiProgrammingLanguageApplication : No active profile set, falling back to 1 default profile: "default"
+2025-11-11T18:04:12.016Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8443 (https)
+2025-11-11T18:04:12.044Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-11-11T18:04:12.045Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-11-11T18:04:12.093Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-11-11T18:04:12.096Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3260 ms
+2025-11-11T18:04:12.699Z  WARN 1728 --- [SindhiProgrammingLanguage] [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 7a14f5d9-6563-4078-8c82-29f430964711
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-11T18:04:12.723Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-11-11T18:04:13.328Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2025-11-11T18:04:14.557Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] o.a.t.util.net.NioEndpoint.certificate   : Connector [https-jsse-nio-8443], TLS virtual host [_default_], certificate type [UNDEFINED] configured from keystore [/home/ubuntu/.keystore] using alias [tomcat] with trust store [null]
+2025-11-11T18:04:14.574Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8443 (https) with context path '/'
+2025-11-11T18:04:14.603Z  INFO 1728 --- [SindhiProgrammingLanguage] [           main] e.S.SindhiProgrammingLanguageApplication : Started SindhiProgrammingLanguageApplication in 6.785 seconds (process running for 7.534)
+2025-11-11T18:08:40.897Z  INFO 1728 --- [SindhiProgrammingLanguage] [nio-8443-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-11T18:08:40.898Z  INFO 1728 --- [SindhiProgrammingLanguage] [nio-8443-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-11-11T18:08:40.899Z  INFO 1728 --- [SindhiProgrammingLanguage] [nio-8443-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-11-11T18:08:41.372Z  WARN 1728 --- [SindhiProgrammingLanguage] [nio-8443-exec-4] c.e.S.S.RequestLoggingFilter             : Geo fetch failed for IP 13.235.94.89: 429 Too Many Requests on GET request for "https://ipapi.co/13.235.94.89/json/": "{<EOL>    "error": true,<EOL>    "reason": "RateLimited",<EOL>    "message": "Visit https://ipapi.co/ratelimited/ for details"<EOL>}"
+2025-11-11T18:08:41.461Z  INFO 1728 --- [SindhiProgrammingLanguage] [nio-8443-exec-4] c.e.S.S.RequestLoggingFilter             : 🌐 Request Info: IP=13.235.94.89, URI=/actuator/health, Device=Desktop, OS=Other, Browser=Other, Origin=null, Referer=null, Country=Unknown, Region=Unknown, City=Unknown, Duration=510ms

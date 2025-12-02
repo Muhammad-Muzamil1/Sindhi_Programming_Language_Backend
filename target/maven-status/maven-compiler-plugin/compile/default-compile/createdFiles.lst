@@ -4,7 +4,6 @@ com/example/SindhiProgrammingLanguage/SindhiCodeRequest.class
 com/example/SindhiProgrammingLanguage/Compiler/SindhiToken$Type.class
 com/example/SindhiProgrammingLanguage/SindhiProgrammingLanguageApplication.class
 com/example/SindhiProgrammingLanguage/Compiler/SindhiValue$Type.class
-com/example/SindhiProgrammingLanguage/SecurityLayer/RequestLoggingFilter.class
 com/example/SindhiProgrammingLanguage/Compiler/SindhiLexer$TokenRule.class
 com/example/SindhiProgrammingLanguage/PresentationLayer/SindhiProgrammingController.class
 com/example/SindhiProgrammingLanguage/Compiler/SindhiValue.class

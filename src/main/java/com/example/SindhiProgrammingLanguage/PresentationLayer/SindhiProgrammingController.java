@@ -20,10 +20,9 @@ public class SindhiProgrammingController {
             String result = sindhiProgrammingInterpreterServices.execute(Code.getSindhiCode());
             return ResponseEntity.ok(result);
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error: " + e.getMessage());
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("غلطي: " + e.getMessage());
         }
     }
 

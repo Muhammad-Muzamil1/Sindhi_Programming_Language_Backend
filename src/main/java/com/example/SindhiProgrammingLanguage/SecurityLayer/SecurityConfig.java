@@ -6,12 +6,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.time.Duration;
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -19,21 +13,23 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
+
                 .headers(headers -> headers
                         .frameOptions(frame -> frame.sameOrigin())
-                        .httpStrictTransportSecurity(hsts -> hsts
-                                .includeSubDomains(true)
-                                .maxAgeInSeconds(31536000))
                 )
+
                 .authorizeHttpRequests(auth -> auth
-                        // ✅ Allow all endpoints under /SindhiLanguage/v1
+
+                        // Allow your REST API
                         .requestMatchers("/SindhiLanguage/v1/**").permitAll()
-.requestMatchers("/actuator/health/**").permitAll()
-                        
-                        // ✅ Swagger/OpenAPI endpoints
+
+                        // Allow Actuator health check
+                        .requestMatchers("/actuator/health/**").permitAll()
+
+                        // Allow Swagger / OpenAPI
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
@@ -42,27 +38,20 @@ public class SecurityConfig {
                                 "/v3/api-docs/swagger-config"
                         ).permitAll()
 
-                        // ✅ All other requests require authentication
+                        // Allow frontend files
+                        .requestMatchers(
+                                "/",
+                                "/index.html",
+                                "/styles.css",
+                                "/script.js",
+                                "/images/**",
+                                "/assets/**"
+                        ).permitAll()
+
+                        // Everything else requires authentication
                         .anyRequest().authenticated()
                 );
 
         return http.build();
     }
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-
-        // ✅ Allow only your frontend domain
-        config.setAllowedOrigins(List.of("https://latifjiboli.app"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
-        config.setMaxAge(Duration.ofHours(1));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
-
 }

@@ -1,0 +1,835 @@
+/* Font imports with font-display swap for better performance */
+@font-face {
+  font-family: "MB Sania";
+  src: url("./assets/fonts/mb\ sania.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CSS Variables */
+:root {
+  --primary-color: #d64161;
+  --secondary-color: #1a6985;
+  --accent-color: #e9b44c;
+  --dark-color: #2c3e50;
+  --light-color: #f9f7f7;
+  --ajrak-blue: #1a6985;
+  --ajrak-red: #d64161;
+  --ajrak-maroon: #8b0000;
+  --ajrak-gold: #e9b44c;
+  --transition-speed: 0.3s;
+}
+
+/* Global Styles - Optimized */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "mb sania", serif;
+  background: linear-gradient(135deg, var(--ajrak-maroon), var(--ajrak-blue));
+  color: var(--light-color);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Simplified Ajrak Pattern Background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(var(--ajrak-gold) 2px, transparent 2px),
+    radial-gradient(var(--ajrak-red) 2px, transparent 2px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  opacity: 0.1;
+  z-index: -2;
+  will-change: transform; /* Performance hint */
+}
+
+/* Simplified background pattern */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+      45deg,
+      rgba(26, 105, 133, 0.1) 0,
+      rgba(26, 105, 133, 0.1) 1px,
+      transparent 1px,
+      transparent 10px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(214, 65, 97, 0.1) 0,
+      rgba(214, 65, 97, 0.1) 1px,
+      transparent 1px,
+      transparent 10px
+    );
+  z-index: -1;
+  will-change: transform; /* Performance hint */
+}
+
+/* Background Elements - Optimized */
+.background-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none; /* Prevent interaction with background */
+}
+
+.floating-letters {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  perspective: 600px;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
+.floating-letter {
+  position: absolute;
+  font-family: 'MB Sania', sans-serif;
+  text-shadow: 0 0 5px rgba(233, 180, 76, 0.5);
+  transform-style: preserve-3d;
+  animation: float3D 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Simplified background for editor and docs pages */
+#editor-page,
+#docs-page {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+#editor-page::before,
+#docs-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Solid color instead of blurred image */
+  z-index: -1;
+}
+
+/* Dark overlay for readability */
+#editor-page::after,
+#docs-page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+/* Content containers */
+.editor-container,
+.docs-container {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  padding: 20px;
+}
+
+/* Simplified Ajrak Border */
+.ajrak-border {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  border: 10px solid transparent;
+  border-image: repeating-linear-gradient(
+      45deg,
+      var(--ajrak-red),
+      var(--ajrak-red) 10px,
+      var(--ajrak-blue) 10px,
+      var(--ajrak-blue) 20px,
+      var(--ajrak-gold) 20px,
+      var(--ajrak-gold) 30px
+    )
+    10;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.3;
+}
+
+/* Page Layout - Optimized transitions */
+.page {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.page.active {
+  display: block;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Welcome Page - Simplified */
+.welcome-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 90vh;
+  position: relative;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Reduced shadow complexity */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.greeting {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+  color: var(--light-color);
+  text-shadow: 0 0 20px rgba(233, 180, 76, 0.7); /* Simplified shadow */
+  animation: textGlow 3s infinite alternate;
+}
+
+.language-name {
+  font-size: 6rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: var(--accent-color);
+  text-shadow: 0 0 20px rgba(214, 65, 97, 0.7); /* Simplified shadow */
+  animation: languageGlow 3s infinite alternate;
+}
+
+.poet-portrait {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 1rem auto;
+  border: 4px solid var(--accent-color);
+  box-shadow: 0 0 20px rgba(233, 180, 76, 0.5); /* Simplified shadow */
+  position: relative;
+}
+
+.portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.verse-container {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-radius: 10px;
+  background: rgba(26, 105, 133, 0.3);
+  border: 1px solid var(--ajrak-blue);
+  max-width: 80%;
+  animation: fadeIn 1s ease-out;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.verse {
+  font-family: "mb sania", serif;
+  font-size: 2rem;
+  line-height: 2.8rem;
+  color: var(--light-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.verse-container {
+  animation: pulse 5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.01); }
+}
+
+.buttons-container {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+/* Background Image with Reduced Blur */
+#editor-page, #docs-page {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+#editor-page::before, #docs-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/images/sindhi-ajrak-pattern.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px); /* Reduced blur */
+  -webkit-filter: blur(5px); /* Safari support */
+  z-index: -1; /* Behind the content */
+}
+
+/* Dark overlay for readability */
+#editor-page::after, #docs-page::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 0; /* On top of the blurred background */
+}
+
+/* Your content should sit above the blurred background */
+.editor-container, .docs-container {
+  position: relative;
+  z-index: 1; /* Ensure content sits above overlay */
+  color: #fff; /* White text for readability */
+  padding: 20px;
+}
+
+
+/* Button Styles - Simplified */
+.btn {
+  padding: 0.8rem 2rem;
+  font-size: 1.5rem;
+  font-family: "MB Sania", Arial, sans-serif;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--ajrak-red), var(--ajrak-maroon));
+  color: var(--light-color);
+  box-shadow: 0 4px 15px rgba(214, 65, 97, 0.4);
+}
+
+.secondary-btn {
+  background: linear-gradient(135deg, var(--ajrak-blue), #0a3b4a);
+  color: var(--light-color);
+  box-shadow: 0 4px 15px rgba(26, 105, 133, 0.4);
+}
+
+.back-btn {
+  background: transparent;
+  color: var(--light-color);
+  border: 1px solid var(--light-color);
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  transform: translateY(-3px);
+}
+
+/* Editor Page - Simplified */
+.editor-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  position: relative;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Reduced shadow complexity */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.editor-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  position: relative;
+}
+
+.editor-header h2 {
+  font-size: 2rem;
+  color: var(--accent-color);
+  text-shadow: 0 0 10px rgba(233, 180, 76, 0.5);
+}
+
+.editor-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  height: 70vh; /* NEW: fixed height so inner areas can grow */
+  margin: 1rem 0;
+}
+
+.code-panel,
+.output-panel {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  border: 1px solid var(--ajrak-blue);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.panel-header {
+  background: linear-gradient(90deg, var(--ajrak-blue), #0a3b4a);
+  color: var(--light-color);
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.code-area,
+.output-area {
+  flex: 1; /* NEW: Let them grow */
+  min-height: 0; /* NEW: Fixes overflow in grid */
+  height: 100%;
+  padding: 1rem;
+  font-family: "MB Sania", monospace;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--light-color);
+  border: none;
+  resize: none;
+  overflow-y: auto;
+  transition: height 0.3s ease; /* OPTIONAL: smooth transitions */
+}
+.code-area,
+.output-area {
+  transition: height 0.3s ease;
+}
+.code-area:focus {
+  outline: none;
+  box-shadow: inset 0 0 10px var(--accent-color);
+}
+
+.editor-controls {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+/* Documentation Page - Simplified */
+.docs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Reduced shadow complexity */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.docs-header {
+  background: linear-gradient(90deg, var(--ajrak-blue), #0a3b4a);
+  color: var(--light-color);
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.docs-header h2 {
+  font-size: 2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.docs-content {
+  padding: 2rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.docs-content h1 {
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.docs-content h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ajrak-red), var(--ajrak-blue), var(--ajrak-gold));
+  border-radius: 3px;
+}
+
+.docs-section {
+  margin-bottom: 2rem;
+  position: relative;
+  padding: 1rem;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.docs-section h3 {
+  font-size: 1.8rem;
+  color: var(--ajrak-red);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--ajrak-red);
+  padding-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.docs-section p,
+.docs-section li {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.docs-section ul {
+  padding-right: 2rem;
+  list-style-position: inside;
+}
+
+.syntax-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.syntax-table th,
+.syntax-table td {
+  padding: 0.8rem;
+  text-align: right;
+  border: 1px solid rgba(26, 105, 133, 0.3);
+}
+
+.syntax-table th {
+  background: linear-gradient(90deg, var(--ajrak-blue), #0a3b4a);
+  color: var(--light-color);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.syntax-table tr:nth-child(even) {
+  background: rgba(26, 105, 133, 0.1);
+}
+
+.syntax-table tr:hover {
+  background: rgba(233, 180, 76, 0.1);
+}
+
+.example {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.example h4 {
+  font-size: 1.4rem;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.code-example {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(26, 105, 133, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.code-example pre {
+  font-family: "MB Sania", monospace;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  margin-bottom: 1rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+pre {
+            padding: 12px 16px;
+            margin: 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+}
+
+.example-output {
+  border-top: 1px dashed var(--ajrak-blue);
+  padding-top: 0.5rem;
+  font-family: "MB Sania", monospace;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.copy-btn {
+            top: 8px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: var(--ajrak-blue);
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+}
+
+.copy-btn:hover {
+            background-color: var(--ajrak-blue);
+}
+
+
+/* Optimized Animations */
+@keyframes languageGlow {
+  0% {
+    text-shadow: 0 0 10px rgba(214, 65, 97, 0.7);
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.9);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 5px rgba(233, 180, 76, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 15px rgba(233, 180, 76, 0.7);
+  }
+}
+
+/* Simplified 3D float animation */
+@keyframes float3D {
+  0% {
+    transform: translateZ(0) translateY(0);
+  }
+  50% {
+    transform: translateZ(50px) translateY(-20px);
+  }
+  100% {
+    transform: translateZ(0) translateY(0);
+  }
+}
+
+@keyframes float2D {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .floating-letter {
+    transform: none !important;
+    animation: float2D 10s ease-in-out infinite;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .greeting {
+    font-size: 3rem;
+  }
+
+  .language-name {
+    font-size: 2.5rem;
+  }
+
+  .verse {
+    font-size: 1.3rem;
+  }
+
+  .editor-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ajrak-border {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border-width: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .greeting {
+    font-size: 2.5rem;
+  }
+
+  .language-name {
+    font-size: 2rem;
+  }
+
+  .poet-portrait {
+    width: 150px;
+    height: 150px;
+  }
+
+  .verse {
+    font-size: 1.2rem;
+    line-height: 2rem;
+  }
+
+  .buttons-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .docs-content h1 {
+    font-size: 2rem;
+  }
+
+  .docs-section h3 {
+    font-size: 1.5rem;
+  }
+
+  .ajrak-border {
+    border-width: 3px;
+  }
+
+  /* Reduce or disable floating letters on mobile */
+  .floating-letter {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .page {
+    padding: 1rem;
+  }
+
+  .greeting {
+    font-size: 2rem;
+  }
+
+  .language-name {
+    font-size: 1.5rem;
+  }
+
+  .verse-container {
+    padding: 1rem;
+  }
+
+  .verse {
+    font-size: 1rem;
+    line-height: 1.8rem;
+  }
+
+  .docs-content {
+    padding: 1rem;
+  }
+
+  .docs-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .syntax-table th,
+  .syntax-table td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .ajrak-border {
+    display: none;
+  }
+}

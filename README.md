@@ -13,7 +13,7 @@
 [![License](https://img.shields.io/badge/License-Academic%20Project-blue?style=for-the-badge)](#license)
 [![Status](https://img.shields.io/badge/Status-Final%20Year%20Project-success?style=for-the-badge)](#-academic-context)
 
-[🌐 Live Web IDE](https://muhammad-muzamil.github.io/SindhiProgrammingLanguage/) · [📖 Documentation](#-language-guide) · [🚀 Getting Started](#-getting-started) · [📊 Performance](#-performance--load-testing)
+[🌐 Live Web IDE](https://muhammad-muzamil1.github.io/SindhiProgrammingLanguage/) · [📖 Documentation](#-language-guide) · [🚀 Getting Started](#-getting-started) · [📊 Performance](#-performance--load-testing)
 
 </div>
 
@@ -37,7 +37,6 @@
 - [Security & Reliability](#-security--reliability)
 - [Performance & Load Testing](#-performance--load-testing)
 - [Getting Started](#-getting-started)
-- [Deployment](#-deployment)
 - [Project Poster](#-project-poster)
 - [Academic Context](#-academic-context)
 - [Roadmap](#-roadmap)
@@ -390,10 +389,6 @@ Write this in the bundled editor and hit **هلايو** (Run):
 لک عددي عمر = 22
 لکيوَ عمر
 ```
-
-## 🌍 Deployment
-
-This project has been deployed and load-tested on **Railway**, using a Nix/Maven-based build pipeline (with fallbacks documented in commit history for Maven-archive resolution issues), and secured in production with **Let's Encrypt** TLS certificates. The health of the deployment can be monitored via the bundled Spring Boot **Actuator** `/actuator/health` endpoint.
 
 ## 🖼️ Project Poster
 
